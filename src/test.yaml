@@ -1,9 +1,9 @@
 # Model
-MODEL_DIR: "./wandb/Neural_Simulated_Annealing/models/20241211_152739_1lik5x0b/"
+MODEL_DIR: "./wandb/Neural_Simulated_Annealing/models/20241230_101011_gn0185sa/"
 EMBEDDING_DIM: 16
 
 # Device
-DEVICE: "cpu"
+DEVICE: "cuda"
 
 # seed
 SEED: 124
@@ -22,12 +22,12 @@ STOP_TEMP: 0.01
 INIT_TEMP: 1.0
 
 # SA Baseline
-# OUTER_STEPS_BASE: 10000
+# OUTER_STEPS_BASE: 10000 
 STOP_TEMP_BASE: 0.001
 INIT_TEMP_BASE: 100000
 
 # Hill
-HILL: True
+HILL: False
 
 # Threading
 N_THREADS: 4

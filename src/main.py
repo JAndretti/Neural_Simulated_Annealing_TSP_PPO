@@ -115,6 +115,7 @@ def main(cfg) -> None:
                     "Primal_after_train": torch.mean(train_out["primal"]),
                     "Primal_baseline": torch.mean(baseline["primal"]),
                     "Primal_greedy": torch.mean(greedy["primal"]),
+                    "Reward": torch.mean(train_out["reward"]),
                 }
                 WandbLogger.log(logs)
             train_loss = torch.mean(train_out["min_cost"])

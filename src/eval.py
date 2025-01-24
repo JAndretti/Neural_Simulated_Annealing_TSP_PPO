@@ -84,15 +84,21 @@ def evaluate_problem(pb_dim, steps, cfg, actor):
     alpha = np.log(cfg["STOP_TEMP"]) - np.log(cfg["INIT_TEMP"])
     cfg["ALPHA"] = np.exp(alpha / cfg["OUTER_STEPS"]).item()
 
-    start_time = time.time()
-    greedy = sa(actor, problem, init_x, cfg, replay=None, baseline=False, greedy=True)
-    greedy_time = time.time() - start_time
-    print(f"Greedy done for problem dimension {pb_dim} and k = {steps}")
+    with torch.no_grad():
+        actor.eval()
+        start_time = time.time()
+        greedy = sa(
+            actor, problem, init_x, cfg, replay=None, baseline=False, greedy=True
+        )
+        greedy_time = time.time() - start_time
+        print(f"Greedy done for problem dimension {pb_dim} and k = {steps}")
 
-    start_time = time.time()
-    train = sa(actor, problem, init_x, cfg, replay=None, baseline=False, greedy=False)
-    train_time = time.time() - start_time
-    print(f"Training done for problem dimension {pb_dim} and k = {steps}")
+        start_time = time.time()
+        train = sa(
+            actor, problem, init_x, cfg, replay=None, baseline=False, greedy=False
+        )
+        train_time = time.time() - start_time
+        print(f"Training done for problem dimension {pb_dim} and k = {steps}")
 
     metrics = {
         "avg_min_cost_greedy": torch.mean(greedy["min_cost"]).item(),

@@ -205,4 +205,5 @@ def sa(
         "actions": actions,
         "acceptance": acceptance,
         "costs": costs,
+        "reward": reward,
     }
